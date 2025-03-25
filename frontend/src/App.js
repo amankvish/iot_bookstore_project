@@ -1,27 +1,26 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import BookDetail from "./pages/BookDetail";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import OrderPage from "./pages/OrderPage";
-import PaymentPage from "./pages/PaymentPage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/common/PrivateRoute";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/book/:id" element={<BookDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/order" element={<OrderPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-      </Routes>
-      <Footer />
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 }
