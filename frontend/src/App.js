@@ -1,25 +1,58 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import Dashboard from "./pages/Dashboard";
-import PrivateRoute from "./components/common/PrivateRoute";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { AuthProvider } from "./contexts/AuthContext";
+import { CartProvider } from "./contexts/CartContext"; // Add this import
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import HomePage from "./pages/Home";
+import LoginPage from "./pages/auth/Login";
+import RegisterPage from "./pages/auth/Register";
+import DashboardPage from "./pages/dashboard/Dashboard";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
+// Import new components
+import BookStore from "./pages/books/BookStore"; // Adjust the import path as needed
+import BookDetail from "./pages/books/BookDetail"; // Adjust the import path as needed
+import Checkout from "./pages/payment/Checkout"; // Adjust the import path as needed
+import PaymentResult from "./pages/payment/Result"; // Adjust the import path as needed
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/" element={<Dashboard />} />
-          </Route>
-        </Routes>
+        <CartProvider>
+          <div className="app-layout">
+            <Header />
+            <div className="content-wrapper">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                />
+                {/* Add new routes here */}
+                <Route path="/books" element={<BookStore />} />
+                <Route path="/books/:id" element={<BookDetail />} />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <Checkout />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/payment/result" element={<PaymentResult />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+        </CartProvider>
       </AuthProvider>
     </Router>
   );

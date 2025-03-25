@@ -1,0 +1,47 @@
+// Import Bootstrap first
+@import '~bootstrap/scss/bootstrap';
+
+// Then import Font Awesome
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+// Base styles
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #2d3748;
+  background-color: #f5f5f5;
+}
+
+// Custom utilities
+.bg-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+// Custom components
+.book-card {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #5c6bc0, #3f51b5);
+  border: none;
+  color: white;
+  &:hover {
+    background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+    color: white;
+  }
+}

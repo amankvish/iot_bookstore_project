@@ -1,41 +1,43 @@
-body {
-  font-family: Arial, sans-serif;
+/* frontend/src/App.css */
+:root {
+  --primary: #4a6bff;
+  --primary-dark: #3a56cc;
+  --secondary: #00c8a0;
+  --dark: #1a1f36;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --white: #ffffff;
+  --black: #212529;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-header {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--black);
+  line-height: 1.6;
+  background-color: var(--light);
 }
 
-footer {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.book-list {
+.app-layout {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.book-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  width: 200px;
-  text-align: center;
+.content-wrapper {
+  flex: 1;
+  padding-top: 80px; /* Offset for fixed header */
+  padding-bottom: 60px; /* Space for footer */
 }
 
-.book-card img {
-  max-width: 100%;
-  height: auto;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding-top: 70px;
+  }
 }
